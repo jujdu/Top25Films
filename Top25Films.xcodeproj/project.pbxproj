@@ -7,19 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F650E682368472C00DA9197 /* TopFilmsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F650E672368472C00DA9197 /* TopFilmsPresenter.swift */; };
 		6F8FDD812363298800E2F49F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FDD802363298800E2F49F /* AppDelegate.swift */; };
 		6F8FDD832363298800E2F49F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FDD822363298800E2F49F /* SceneDelegate.swift */; };
 		6F8FDD8A2363298E00E2F49F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FDD892363298E00E2F49F /* Assets.xcassets */; };
 		6F8FDDB523632FDF00E2F49F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FDDB423632FDE00E2F49F /* LaunchScreen.storyboard */; };
-		6F8FDDBB2363317A00E2F49F /* TopFilmsViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FDDBA2363317A00E2F49F /* TopFilmsViewController2.swift */; };
+		6F8FDDBB2363317A00E2F49F /* TopFilmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FDDBA2363317A00E2F49F /* TopFilmsViewController.swift */; };
 		6F8FDDBD23633A9300E2F49F /* TopFilmsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FDDBC23633A9300E2F49F /* TopFilmsApi.swift */; };
 		6F8FDDBF236352A900E2F49F /* FilmApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FDDBE236352A900E2F49F /* FilmApi.swift */; };
-		6FB336D823663C5700D97F8F /* TopFilmsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB336D123663C5700D97F8F /* TopFilmsPresenter.swift */; };
-		6FB336D923663C5700D97F8F /* TopFilmsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB336D223663C5700D97F8F /* TopFilmsWorker.swift */; };
-		6FB336DA23663C5700D97F8F /* TopFilmsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB336D323663C5700D97F8F /* TopFilmsRouter.swift */; };
-		6FB336DB23663C5700D97F8F /* TopFilmsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB336D423663C5700D97F8F /* TopFilmsModels.swift */; };
-		6FB336DC23663C5700D97F8F /* TopFilmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB336D523663C5700D97F8F /* TopFilmsViewController.swift */; };
-		6FB336DD23663C5700D97F8F /* TopFilmsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB336D623663C5700D97F8F /* TopFilmsInteractor.swift */; };
 		6FEF667323637FF600F78BBD /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF667223637FF600F78BBD /* Constraints.swift */; };
 		6FEF66752363811400F78BBD /* FilmDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF66742363811400F78BBD /* FilmDetailViewController.swift */; };
 		6FEF6677236387EF00F78BBD /* TopFilmsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF6676236387EF00F78BBD /* TopFilmsCell.swift */; };
@@ -32,21 +27,16 @@
 /* Begin PBXFileReference section */
 		37476FD9B9B8AD2707F89EB9 /* Pods-Top25Films.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Top25Films.release.xcconfig"; path = "Target Support Files/Pods-Top25Films/Pods-Top25Films.release.xcconfig"; sourceTree = "<group>"; };
 		5F9285912B43C0A249F9F094 /* Pods_Top25Films.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Top25Films.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F650E672368472C00DA9197 /* TopFilmsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsPresenter.swift; sourceTree = "<group>"; };
 		6F8FDD7D2363298800E2F49F /* Top25Films.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Top25Films.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8FDD802363298800E2F49F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F8FDD822363298800E2F49F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6F8FDD892363298E00E2F49F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F8FDD8E2363298E00E2F49F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F8FDDB423632FDE00E2F49F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		6F8FDDBA2363317A00E2F49F /* TopFilmsViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsViewController2.swift; sourceTree = "<group>"; };
+		6F8FDDBA2363317A00E2F49F /* TopFilmsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsViewController.swift; sourceTree = "<group>"; };
 		6F8FDDBC23633A9300E2F49F /* TopFilmsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsApi.swift; sourceTree = "<group>"; };
 		6F8FDDBE236352A900E2F49F /* FilmApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmApi.swift; sourceTree = "<group>"; };
-		6FB336D123663C5700D97F8F /* TopFilmsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsPresenter.swift; sourceTree = "<group>"; };
-		6FB336D223663C5700D97F8F /* TopFilmsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsWorker.swift; sourceTree = "<group>"; };
-		6FB336D323663C5700D97F8F /* TopFilmsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsRouter.swift; sourceTree = "<group>"; };
-		6FB336D423663C5700D97F8F /* TopFilmsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsModels.swift; sourceTree = "<group>"; };
-		6FB336D523663C5700D97F8F /* TopFilmsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsViewController.swift; sourceTree = "<group>"; };
-		6FB336D623663C5700D97F8F /* TopFilmsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsInteractor.swift; sourceTree = "<group>"; };
 		6FEF667223637FF600F78BBD /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 		6FEF66742363811400F78BBD /* FilmDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDetailViewController.swift; sourceTree = "<group>"; };
 		6FEF6676236387EF00F78BBD /* TopFilmsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsCell.swift; sourceTree = "<group>"; };
@@ -88,14 +78,9 @@
 		6F6C474123661C80001E2127 /* TopFilms */ = {
 			isa = PBXGroup;
 			children = (
-				6F8FDDBA2363317A00E2F49F /* TopFilmsViewController2.swift */,
+				6F8FDDBA2363317A00E2F49F /* TopFilmsViewController.swift */,
+				6F650E672368472C00DA9197 /* TopFilmsPresenter.swift */,
 				6FEF6676236387EF00F78BBD /* TopFilmsCell.swift */,
-				6FB336D123663C5700D97F8F /* TopFilmsPresenter.swift */,
-				6FB336D223663C5700D97F8F /* TopFilmsWorker.swift */,
-				6FB336D323663C5700D97F8F /* TopFilmsRouter.swift */,
-				6FB336D423663C5700D97F8F /* TopFilmsModels.swift */,
-				6FB336D523663C5700D97F8F /* TopFilmsViewController.swift */,
-				6FB336D623663C5700D97F8F /* TopFilmsInteractor.swift */,
 			);
 			path = TopFilms;
 			sourceTree = "<group>";
@@ -150,13 +135,13 @@
 			path = Top25Films;
 			sourceTree = "<group>";
 		};
-		6F8FDDC0236354FE00E2F49F /* Model */ = {
+		6F8FDDC0236354FE00E2F49F /* JSONResponse */ = {
 			isa = PBXGroup;
 			children = (
 				6F8FDDBC23633A9300E2F49F /* TopFilmsApi.swift */,
 				6F8FDDBE236352A900E2F49F /* FilmApi.swift */,
 			);
-			path = Model;
+			path = JSONResponse;
 			sourceTree = "<group>";
 		};
 		6FEF667123637FEA00F78BBD /* Helpers */ = {
@@ -171,7 +156,7 @@
 		6FEF66782363882100F78BBD /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				6F8FDDC0236354FE00E2F49F /* Model */,
+				6F8FDDC0236354FE00E2F49F /* JSONResponse */,
 				6FEF66792363921C00F78BBD /* NetworkService.swift */,
 				6FEF667B2363A0B900F78BBD /* NetworkDataFetcher.swift */,
 			);
@@ -292,18 +277,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FB336DD23663C5700D97F8F /* TopFilmsInteractor.swift in Sources */,
-				6FB336D823663C5700D97F8F /* TopFilmsPresenter.swift in Sources */,
+				6F650E682368472C00DA9197 /* TopFilmsPresenter.swift in Sources */,
 				6FEF667E2363A30400F78BBD /* String+Extension.swift in Sources */,
 				6F8FDDBD23633A9300E2F49F /* TopFilmsApi.swift in Sources */,
 				6FEF6677236387EF00F78BBD /* TopFilmsCell.swift in Sources */,
-				6FB336DC23663C5700D97F8F /* TopFilmsViewController.swift in Sources */,
-				6FB336DB23663C5700D97F8F /* TopFilmsModels.swift in Sources */,
-				6F8FDDBB2363317A00E2F49F /* TopFilmsViewController2.swift in Sources */,
+				6F8FDDBB2363317A00E2F49F /* TopFilmsViewController.swift in Sources */,
 				6F8FDDBF236352A900E2F49F /* FilmApi.swift in Sources */,
-				6FB336DA23663C5700D97F8F /* TopFilmsRouter.swift in Sources */,
 				6FEF667C2363A0B900F78BBD /* NetworkDataFetcher.swift in Sources */,
-				6FB336D923663C5700D97F8F /* TopFilmsWorker.swift in Sources */,
 				6FEF667A2363921C00F78BBD /* NetworkService.swift in Sources */,
 				6F8FDD812363298800E2F49F /* AppDelegate.swift in Sources */,
 				6FEF667323637FF600F78BBD /* Constraints.swift in Sources */,
