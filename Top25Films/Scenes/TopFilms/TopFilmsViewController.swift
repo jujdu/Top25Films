@@ -100,7 +100,7 @@ class TopFilmsViewController: UIViewController, TopFilmsViewProtocol {
 //MARK: - UITableViewDelegate, UITableViewDataSource
 extension TopFilmsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.numberOfBooks ?? 0
+        return presenter?.numberOfFilms ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

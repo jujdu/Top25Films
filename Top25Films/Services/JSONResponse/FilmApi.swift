@@ -19,11 +19,11 @@ struct FilmApi: Decodable {
 
 // MARK: - Result
 struct Film: Decodable {
-    let directorName: String
+    let directorName: String?
     let filmName: String
-    let country: String
+    let country: String?
     let longDescription: String
-    let shortDescription: String
+    let shortDescription: String?
     let posterUrl100: String
     
     enum CodingKeys: String, CodingKey {

@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 protocol FilmDetailViewProtocol: class {
-    func refreshView(name: String, plot: String, imageUrl: URL?)
+    func refreshView()
     func loadingView(is loading: Bool)
 }
 
@@ -31,36 +31,20 @@ class FilmDetailViewController: UIViewController, FilmDetailViewProtocol {
     }
     
     //MARK: - UIViews
-    let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.alignment = .center
-        stackView.spacing = 16.0
-        return stackView
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        return tableView
     }()
     
-    let posterImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
-    
-    let nameLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let plotLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        return label
-    }()
+    //    let posterImageView: UIImageView = {
+    //        let imageView = UIImageView()
+    //        imageView.translatesAutoresizingMaskIntoConstraints = false
+    //        imageView.clipsToBounds = true
+    //        imageView.contentMode = .scaleAspectFill
+    //        return imageView
+    //    }()
     
     let activityIndictator: UIActivityIndicatorView = {
         let activityIndictator = UIActivityIndicatorView()
@@ -74,46 +58,94 @@ class FilmDetailViewController: UIViewController, FilmDetailViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        configureTableView()
         setConstraints()
         presenter?.attachView(view: self)
     }
     
     //MARK: - User functions
     private func setConstraints() {
-        //        view.addSubview(posterImageView)
-        //        view.addSubview(nameLabel)
-        view.addSubview(stackView)
         view.addSubview(activityIndictator)
-        stackView.addArrangedSubview(posterImageView)
-        stackView.addArrangedSubview(nameLabel)
-        stackView.addArrangedSubview(plotLabel)
-        stackView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
-                         leading: view.leadingAnchor,
-                         bottom: view.safeAreaLayoutGuide.bottomAnchor,
-                         trailing: view.trailingAnchor,
-                         padding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8),
-                         size: .zero)
+        view.addSubview(tableView)
         activityIndictator.center = view.center
-        //        posterImageView.fillSuperview(padding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        
+        tableView.fillSuperview()
+    }
+    
+    private func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(FilmDetailPosterCell.self, forCellReuseIdentifier: FilmDetailPosterCell.reuseId)
+        tableView.register(FilmDetailLabelCell.self, forCellReuseIdentifier: FilmDetailLabelCell.reuseId)
     }
     
     //MARK: - TopFilmsViewProtocol
-    func refreshView(name: String, plot: String, imageUrl: URL?) {
-        posterImageView.setImage(imageUrl: imageUrl)
-        nameLabel.text = name
-        plotLabel.text = plot
+    func refreshView() {
+        tableView.reloadData()
     }
     
     func loadingView(is loading: Bool) {
         if loading == true {
-            posterImageView.isHidden = true
+            tableView.isHidden = true
             activityIndictator.isHidden = false
             activityIndictator.startAnimating()
         } else {
-            posterImageView.isHidden = false
+            tableView.isHidden = false
             activityIndictator.isHidden = true
             activityIndictator.stopAnimating()
         }
     }
+}
+
+//MARK: - UITableViewDelegate, UITableViewDataSource
+extension FilmDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return presenter?.numberOfSections ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        case 0:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: FilmDetailPosterCell.reuseId, for: indexPath) as? FilmDetailPosterCell {
+                presenter?.set(cell: cell, section: indexPath.section)
+                return cell
+            }
+        case 1:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: FilmDetailLabelCell.reuseId, for: indexPath) as? FilmDetailLabelCell {
+                presenter?.set(cell: cell, section: indexPath.section)
+                return cell
+            }
+        case 2:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: FilmDetailLabelCell.reuseId, for: indexPath) as? FilmDetailLabelCell {
+                presenter?.set(cell: cell, section: indexPath.section)
+                return cell
+            }
+        default:
+            return UITableViewCell()
+        }
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return nil
+        case 1:
+            return "Title"
+        case 2:
+            return "Plot"
+        default:
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
 }
 

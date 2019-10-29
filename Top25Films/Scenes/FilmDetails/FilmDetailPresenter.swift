@@ -10,7 +10,8 @@ import Foundation
 
 protocol FilmDetailPresenterProtocol {
     func attachView(view: FilmDetailViewProtocol)
-    //    func set(cell: TopFilmsCell, row: Int)
+    var numberOfSections: Int { get }
+    func set(cell: FilmDetailCellProtocol, section: Int)
 }
 
 class FilmDetailPresenter: FilmDetailPresenterProtocol {
@@ -19,6 +20,7 @@ class FilmDetailPresenter: FilmDetailPresenterProtocol {
     private let networkDataFetcher: NetworkDataFetcher
     weak private var view: FilmDetailViewProtocol?
     
+    var numberOfSections: Int = 0
     private var filmId: String!
     private var film: Film!
     
@@ -35,18 +37,10 @@ class FilmDetailPresenter: FilmDetailPresenterProtocol {
             guard let self = self else { return }
             self.film = filmApi.films.first
             
-            let imageUrl = self.handleUrlString(urlString: self.film.posterUrl100)
-            self.view?.refreshView(name: self.film.filmName,
-                                   plot: self.film.longDescription,
-                                   imageUrl: imageUrl)
+            self.numberOfSections = 3
             self.view?.loadingView(is: false)
+            self.view?.refreshView()
         }
-    }
-    
-    func attachView(view: FilmDetailViewProtocol) {
-        self.view = view
-        view.loadingView(is: true)
-        getData()
     }
     
     func handleUrlString(urlString: String?) -> URL? {
@@ -54,5 +48,27 @@ class FilmDetailPresenter: FilmDetailPresenterProtocol {
         let convertedUrlString = urlString.convertUrlImageResolution(width: 500, height: 500)
         guard let url = URL(string: convertedUrlString) else { return nil }
         return url
-    }    
+    }
+    
+    //MARK: - FilmDetailPresenterProtocol
+    
+    func attachView(view: FilmDetailViewProtocol) {
+        self.view = view
+        view.loadingView(is: true)
+        getData()
+    }
+    
+    func set(cell: FilmDetailCellProtocol, section: Int) {
+        switch section {
+        case 0:
+            let convertedString = film.posterUrl100.convertUrlImageResolution(width: 600, height: 600)
+            cell.set(with: convertedString)
+        case 1:
+            cell.set(with: film.filmName)
+        case 2:
+            cell.set(with: film.longDescription)
+        default:
+            print("abc")
+        }
+    }
 }

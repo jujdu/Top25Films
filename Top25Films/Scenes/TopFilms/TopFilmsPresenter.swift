@@ -10,7 +10,7 @@ import Foundation
 
 protocol TopFilmsPresenterProtocol {
     func attachView(view: TopFilmsViewProtocol)
-    var numberOfBooks: Int { get }
+    var numberOfFilms: Int { get }
     func set(cell: TopFilmsCell, row: Int)
     func didSelect(row: Int)
 }
@@ -23,7 +23,7 @@ class TopFilmsPresenter: TopFilmsPresenterProtocol {
     weak private var view: TopFilmsViewProtocol?
     
     var topFilms: [TopFilm] = []
-    var numberOfBooks: Int {
+    var numberOfFilms: Int {
         return topFilms.count
     }
     
