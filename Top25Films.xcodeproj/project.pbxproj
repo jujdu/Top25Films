@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		6F650E682368472C00DA9197 /* TopFilmsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F650E672368472C00DA9197 /* TopFilmsPresenter.swift */; };
 		6F650E6A2368600200DA9197 /* TopFilmsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F650E692368600200DA9197 /* TopFilmsRouter.swift */; };
+		6F650E6C236867B400DA9197 /* FilmDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F650E6B236867B400DA9197 /* FilmDetailPresenter.swift */; };
+		6F650E6E236879E600DA9197 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F650E6D236879E600DA9197 /* Constants.swift */; };
+		6F650E7023687AEA00DA9197 /* Kingfisher+UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F650E6F23687AEA00DA9197 /* Kingfisher+UIImageView+Extensions.swift */; };
 		6F8FDD812363298800E2F49F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FDD802363298800E2F49F /* AppDelegate.swift */; };
 		6F8FDD832363298800E2F49F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FDD822363298800E2F49F /* SceneDelegate.swift */; };
 		6F8FDD8A2363298E00E2F49F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FDD892363298E00E2F49F /* Assets.xcassets */; };
@@ -30,6 +33,9 @@
 		5F9285912B43C0A249F9F094 /* Pods_Top25Films.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Top25Films.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F650E672368472C00DA9197 /* TopFilmsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsPresenter.swift; sourceTree = "<group>"; };
 		6F650E692368600200DA9197 /* TopFilmsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopFilmsRouter.swift; sourceTree = "<group>"; };
+		6F650E6B236867B400DA9197 /* FilmDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDetailPresenter.swift; sourceTree = "<group>"; };
+		6F650E6D236879E600DA9197 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		6F650E6F23687AEA00DA9197 /* Kingfisher+UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kingfisher+UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		6F8FDD7D2363298800E2F49F /* Top25Films.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Top25Films.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8FDD802363298800E2F49F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F8FDD822363298800E2F49F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				6FEF66742363811400F78BBD /* FilmDetailViewController.swift */,
+				6F650E6B236867B400DA9197 /* FilmDetailPresenter.swift */,
 			);
 			path = FilmDetails;
 			sourceTree = "<group>";
@@ -152,6 +159,8 @@
 			children = (
 				6FEF667223637FF600F78BBD /* Constraints.swift */,
 				6FEF667D2363A30400F78BBD /* String+Extension.swift */,
+				6F650E6D236879E600DA9197 /* Constants.swift */,
+				6F650E6F23687AEA00DA9197 /* Kingfisher+UIImageView+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -285,10 +294,13 @@
 				6F8FDDBD23633A9300E2F49F /* TopFilmsApi.swift in Sources */,
 				6FEF6677236387EF00F78BBD /* TopFilmsCell.swift in Sources */,
 				6F8FDDBB2363317A00E2F49F /* TopFilmsViewController.swift in Sources */,
+				6F650E6E236879E600DA9197 /* Constants.swift in Sources */,
 				6F8FDDBF236352A900E2F49F /* FilmApi.swift in Sources */,
 				6FEF667C2363A0B900F78BBD /* NetworkDataFetcher.swift in Sources */,
+				6F650E6C236867B400DA9197 /* FilmDetailPresenter.swift in Sources */,
 				6F650E6A2368600200DA9197 /* TopFilmsRouter.swift in Sources */,
 				6FEF667A2363921C00F78BBD /* NetworkService.swift in Sources */,
+				6F650E7023687AEA00DA9197 /* Kingfisher+UIImageView+Extensions.swift in Sources */,
 				6F8FDD812363298800E2F49F /* AppDelegate.swift in Sources */,
 				6FEF667323637FF600F78BBD /* Constraints.swift in Sources */,
 				6F8FDD832363298800E2F49F /* SceneDelegate.swift in Sources */,

@@ -57,7 +57,7 @@ class TopFilmsPresenter: TopFilmsPresenterProtocol {
     
     func didSelect(row: Int) {
         let filmId = topFilms[row].id
-        guard let router = router else { return }
-        router.presentFilmDetailView(for: filmId)
+        print("Presenter send",filmId)
+        router?.presentFilmDetailView(for: filmId)
     }
 }

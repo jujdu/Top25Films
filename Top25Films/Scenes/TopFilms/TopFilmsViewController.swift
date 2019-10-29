@@ -18,6 +18,26 @@ class TopFilmsViewController: UIViewController, TopFilmsViewProtocol {
     //MARK: - Properties
     private var presenter: TopFilmsPresenterProtocol?
     
+    //MARK: - Inits
+    init(with presenter: TopFilmsPresenterProtocol) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+        view.backgroundColor = .white
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - Setup configuration
+    private func setup() {
+        let viewController       = self
+        let router               = TopFilmsRouter(topFilmsViewController: self)
+        let presenter            = TopFilmsPresenter(router: router)
+        viewController.presenter = presenter
+        print(router)
+    }
+    
     //MARK: - UIViews
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -34,31 +54,12 @@ class TopFilmsViewController: UIViewController, TopFilmsViewProtocol {
         return activityIndictator
     }()
     
-    //MARK: - Inits
-    init(with presenter: TopFilmsPresenterProtocol) {
-        self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
-        view.backgroundColor = .white
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    //MARK: - Setup configuration
-    
-    private func setup() {
-        let viewController        = self
-        let router                = TopFilmsRouter(topFilmsViewController: self)
-        let presenter             = TopFilmsPresenter(router: router)
-        viewController.presenter  = presenter
-    }
-    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         configureTableView()
+        setConstraints()
         presenter?.attachView(view: self)
     }
     
@@ -67,15 +68,18 @@ class TopFilmsViewController: UIViewController, TopFilmsViewProtocol {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TopFilmsCell.self, forCellReuseIdentifier: TopFilmsCell.reuseId)
-        
+    }
+    
+    //MARK: - Constraints
+    func setConstraints() {
         view.addSubview(tableView)
         view.addSubview(activityIndictator)
         
-        activityIndictator.center = view.center
         tableView.fillSuperview()
+        activityIndictator.center = view.center
     }
     
-    //MARK: - Working with View
+    //MARK: - TopFilmsViewProtocol
     func refreshView() {
         tableView.reloadData()
     }

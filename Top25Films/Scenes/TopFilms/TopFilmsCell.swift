@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class TopFilmsCell: UITableViewCell {
     
@@ -52,8 +53,8 @@ class TopFilmsCell: UITableViewCell {
     
     //MARK: - User functions
     func set(film: TopFilm) {
-        guard let url = URL(string: film.artworkUrl100) else { return }
-        posterImageView.kf.setImage(with: url)
+        guard let imageUrl = URL(string: film.artworkUrl100) else { return }
+        posterImageView.setImage(imageUrl: imageUrl)
         
         nameLabel.text = film.name
     }

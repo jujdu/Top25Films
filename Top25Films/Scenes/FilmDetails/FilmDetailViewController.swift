@@ -9,12 +9,35 @@
 import UIKit
 import Kingfisher
 
-class FilmDetailViewController: UIViewController {
+protocol FilmDetailViewProtocol: class {
+    func refreshView(imageUrl: URL?)
+    func loadingView(is loading: Bool)
+}
+
+class FilmDetailViewController: UIViewController, FilmDetailViewProtocol {
     
-    let networkDataFetcher = NetworkDataFetcher()
-    var filmId: String!
-    var film: Film!
-        
+    //MARK: - Properties
+    private var presenter: FilmDetailPresenterProtocol?
+    
+    //MARK: - Inits
+    init(with presenter: FilmDetailPresenterProtocol) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+        view.backgroundColor = .white
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - Setup Configuration
+    //    private func setup() {
+    //        let viewController       = self
+    //        let presenter            = FilmDetailPresenter()
+    //        viewController.presenter = presenter
+    //    }
+    
+    //MARK: - UIViews
     let posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,28 +54,47 @@ class FilmDetailViewController: UIViewController {
         return label
     }()
     
+    let activityIndictator: UIActivityIndicatorView = {
+        let activityIndictator = UIActivityIndicatorView()
+        activityIndictator.hidesWhenStopped = true
+        activityIndictator.style = .large
+        activityIndictator.color = .gray
+        return activityIndictator
+    }()
+    
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupView()
-        
-        networkDataFetcher.getAFilm(id: filmId) { (response) in
-            guard let response = response?.films.first else { return }
-            self.film = response
-            print(response)
-            
-//            guard let image = self.film.artworkUrl100?.convertUrlImageResolution(width: 100, height: 100) else { return }
-//              guard let imageUrl = URL(string: image) else { return }
-//            self.posterImageView.kf.setImage(with: imageUrl)
-        }
-  
+        setConstraints()
+        presenter?.attachView(view: self)
     }
     
-    private func setupView() {
+    //MARK: - User functions
+    private func setConstraints() {
         view.addSubview(posterImageView)
         view.addSubview(nameLabel)
+        view.addSubview(activityIndictator)
         
+        activityIndictator.center = view.center
         posterImageView.fillSuperview(padding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+    }
+    
+    //MARK: - TopFilmsViewProtocol
+    func refreshView(imageUrl: URL?) {
+        posterImageView.setImage(imageUrl: imageUrl)
+    }
+    
+    func loadingView(is loading: Bool) {
+        if loading == true {
+            posterImageView.isHidden = true
+            activityIndictator.isHidden = false
+            activityIndictator.startAnimating()
+        } else {
+            posterImageView.isHidden = false
+            activityIndictator.isHidden = true
+            activityIndictator.stopAnimating()
+        }
     }
 }
 

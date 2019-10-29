@@ -24,8 +24,9 @@ class TopFilmsRouter: TopFilmsRouterProtocol {
     
     //MARK: - TopFilmsRounter
     func presentFilmDetailView(for id: String) {
-        let filmDetailVC = FilmDetailViewController()
-        filmDetailVC.filmId = id
+        print(id)
+        let filmDetailPresenter = FilmDetailPresenter(filmId: id)
+        let filmDetailVC = FilmDetailViewController(with: filmDetailPresenter)
         topFilmsViewController?.navigationController?.pushViewController(filmDetailVC, animated: true)
     }
 }
