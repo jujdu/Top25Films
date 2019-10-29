@@ -32,7 +32,7 @@ class TopFilmsCell: UITableViewCell {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "name"
+        label.textColor = #colorLiteral(red: 0.2621140456, green: 0.2647092342, blue: 0.2647092342, alpha: 1)
         label.numberOfLines = 0
         return label
     }()

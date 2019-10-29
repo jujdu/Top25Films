@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 protocol FilmDetailViewProtocol: class {
-    func refreshView(imageUrl: URL?)
+    func refreshView(name: String, plot: String, imageUrl: URL?)
     func loadingView(is loading: Bool)
 }
 
@@ -30,19 +30,21 @@ class FilmDetailViewController: UIViewController, FilmDetailViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Setup Configuration
-    //    private func setup() {
-    //        let viewController       = self
-    //        let presenter            = FilmDetailPresenter()
-    //        viewController.presenter = presenter
-    //    }
-    
     //MARK: - UIViews
+    let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .center
+        stackView.spacing = 16.0
+        return stackView
+    }()
+    
     let posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .red
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -50,7 +52,13 @@ class FilmDetailViewController: UIViewController, FilmDetailViewProtocol {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "name"
+        return label
+    }()
+    
+    let plotLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         return label
     }()
     
@@ -72,17 +80,28 @@ class FilmDetailViewController: UIViewController, FilmDetailViewProtocol {
     
     //MARK: - User functions
     private func setConstraints() {
-        view.addSubview(posterImageView)
-        view.addSubview(nameLabel)
+        //        view.addSubview(posterImageView)
+        //        view.addSubview(nameLabel)
+        view.addSubview(stackView)
         view.addSubview(activityIndictator)
-        
+        stackView.addArrangedSubview(posterImageView)
+        stackView.addArrangedSubview(nameLabel)
+        stackView.addArrangedSubview(plotLabel)
+        stackView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                         leading: view.leadingAnchor,
+                         bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                         trailing: view.trailingAnchor,
+                         padding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8),
+                         size: .zero)
         activityIndictator.center = view.center
-        posterImageView.fillSuperview(padding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        //        posterImageView.fillSuperview(padding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
     }
     
     //MARK: - TopFilmsViewProtocol
-    func refreshView(imageUrl: URL?) {
+    func refreshView(name: String, plot: String, imageUrl: URL?) {
         posterImageView.setImage(imageUrl: imageUrl)
+        nameLabel.text = name
+        plotLabel.text = plot
     }
     
     func loadingView(is loading: Bool) {

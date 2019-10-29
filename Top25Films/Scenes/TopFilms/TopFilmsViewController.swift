@@ -35,7 +35,6 @@ class TopFilmsViewController: UIViewController, TopFilmsViewProtocol {
         let router               = TopFilmsRouter(topFilmsViewController: self)
         let presenter            = TopFilmsPresenter(router: router)
         viewController.presenter = presenter
-        print(router)
     }
     
     //MARK: - UIViews
@@ -61,6 +60,7 @@ class TopFilmsViewController: UIViewController, TopFilmsViewProtocol {
         configureTableView()
         setConstraints()
         presenter?.attachView(view: self)
+        navigationItem.title = "Top 25 Films"
     }
     
     //MARK: - User functions

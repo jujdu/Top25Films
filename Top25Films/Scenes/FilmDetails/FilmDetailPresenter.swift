@@ -36,7 +36,9 @@ class FilmDetailPresenter: FilmDetailPresenterProtocol {
             self.film = filmApi.films.first
             
             let imageUrl = self.handleUrlString(urlString: self.film.posterUrl100)
-            self.view?.refreshView(imageUrl: imageUrl)
+            self.view?.refreshView(name: self.film.filmName,
+                                   plot: self.film.longDescription,
+                                   imageUrl: imageUrl)
             self.view?.loadingView(is: false)
         }
     }
