@@ -10,26 +10,54 @@ import Foundation
 
 protocol TopFilmsPresenterProtocol {
     func attachView(view: TopFilmsViewProtocol)
+    var numberOfBooks: Int { get }
+    func set(cell: TopFilmsCell, row: Int)
+    func didSelect(row: Int)
 }
 
 class TopFilmsPresenter: TopFilmsPresenterProtocol {
     
+    //MARK: - Properties
     private let networkDataFetcher: NetworkDataFetcher
+    let router: TopFilmsRouterProtocol?
     weak private var view: TopFilmsViewProtocol?
     
-    init(networkDataFetcher: NetworkDataFetcher = NetworkDataFetcher()) {
+    var topFilms: [TopFilm] = []
+    var numberOfBooks: Int {
+        return topFilms.count
+    }
+    
+    //MARK: - Inits
+    init(networkDataFetcher: NetworkDataFetcher = NetworkDataFetcher(), router: TopFilmsRouterProtocol?) {
         self.networkDataFetcher = networkDataFetcher
+        self.router = router
     }
     
-    func attachView(view: TopFilmsViewProtocol) {
-        self.view = view
-        populateData()
-    }
-    
-    func populateData() {
+    //MARK: - User functions
+    private func getData() {
         networkDataFetcher.getTopFilms { [unowned self] (topFilmsApi) in
             guard let topFilmsApi = topFilmsApi else { return }
-            self.view?.topFilms = topFilmsApi.topFilms
+            self.topFilms = topFilmsApi.topFilms
+            self.view?.loadingView(is: false)
+            self.view?.refreshView()
         }
+    }
+    
+    //MARK: - TopFilmsPresenterProtocol
+    func attachView(view: TopFilmsViewProtocol) {
+        self.view = view
+        view.loadingView(is: true)
+        getData()
+    }
+    
+    func set(cell: TopFilmsCell, row: Int) {
+        let film = topFilms[row]
+        cell.set(film: film)
+    }
+    
+    func didSelect(row: Int) {
+        let filmId = topFilms[row].id
+        guard let router = router else { return }
+        router.presentFilmDetailView(for: filmId)
     }
 }

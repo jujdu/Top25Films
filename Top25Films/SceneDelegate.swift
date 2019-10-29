@@ -19,9 +19,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        let mainPresenter = TopFilmsPresenter()
-        let mainViewController = TopFilmsViewController(with: mainPresenter)
-        let navigationController = UINavigationController(rootViewController: mainViewController)
+//        let router = TopFilmsRouter(topFilmsViewController: )
+        let presenter = TopFilmsPresenter(router: nil)
+        let viewController = TopFilmsViewController(with: presenter)
+        let navigationController = UINavigationController(rootViewController: viewController)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
