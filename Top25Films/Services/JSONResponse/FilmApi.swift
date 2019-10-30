@@ -19,19 +19,13 @@ struct FilmApi: Decodable {
 
 // MARK: - Result
 struct Film: Decodable {
-    let directorName: String?
     let filmName: String
-    let country: String?
     let longDescription: String
-    let shortDescription: String?
     let posterUrl100: String
     
     enum CodingKeys: String, CodingKey {
-        case directorName = "artistName"
         case filmName = "trackName"
-        case country
-        case longDescription
-        case shortDescription
         case posterUrl100 = "artworkUrl100"
+        case longDescription
     }
 }

@@ -62,6 +62,6 @@ class FilmDetailPosterCell: UITableViewCell, FilmDetailCellProtocol {
         posterImageViewBottomAnchor.isActive = true
         posterImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         posterImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.7).isActive = true
-        posterImageView.heightAnchor.constraint(equalTo: posterImageView.widthAnchor, multiplier: 1.67).isActive = true
+        posterImageView.heightAnchor.constraint(equalTo: posterImageView.widthAnchor, multiplier: 1.5).isActive = true
     }
 }
