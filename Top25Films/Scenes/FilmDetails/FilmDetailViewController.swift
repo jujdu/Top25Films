@@ -38,14 +38,6 @@ class FilmDetailViewController: UIViewController, FilmDetailViewProtocol {
         return tableView
     }()
     
-    //    let posterImageView: UIImageView = {
-    //        let imageView = UIImageView()
-    //        imageView.translatesAutoresizingMaskIntoConstraints = false
-    //        imageView.clipsToBounds = true
-    //        imageView.contentMode = .scaleAspectFill
-    //        return imageView
-    //    }()
-    
     let activityIndictator: UIActivityIndicatorView = {
         let activityIndictator = UIActivityIndicatorView()
         activityIndictator.hidesWhenStopped = true
@@ -130,22 +122,39 @@ extension FilmDetailViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let label = UILabel(frame: CGRect(x: 8, y: 5, width: tableView.frame.width, height: 20))
+        view.backgroundColor = #colorLiteral(red: 0.7930682302, green: 0.7883549333, blue: 0.7966919541, alpha: 1)
+        view.addSubview(label)
+        
         switch section {
         case 0:
+            label.text = nil
             return nil
         case 1:
-            return "Title"
+            label.text = "Title"
+            return view
         case 2:
-            return "Plot"
+            label.text = "Plot"
+            return view
         default:
             return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 0
+        default:
+            return 30
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }
 

@@ -50,6 +50,11 @@ class FilmDetailLabelCell: UITableViewCell, FilmDetailCellProtocol {
         cellView.fillSuperview()
 
         cellView.addSubview(nameLabel)
-        nameLabel.fillSuperview()
+        nameLabel.anchor(top: topAnchor,
+                         leading: leadingAnchor,
+                         bottom: bottomAnchor,
+                         trailing: trailingAnchor,
+                         padding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8),
+                         size: .zero)
     }
 }
