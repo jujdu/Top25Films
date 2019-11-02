@@ -11,6 +11,8 @@ Using libraries:
 
 To parse JSON data it uses Decode protocol.
 
+This app was developed with using clean MVP architecture and Router to send data.
+
 To try this app need:
 1) clone repo.
 2) pod install.
