@@ -1,5 +1,5 @@
 # Top 25 Films
-A test application for a Junior iOS developer vacancy. It uses  RSS iTunes Generator to get top 25 films in iTunes Store. Then it send a request to iTunes Search API with specified film ID to get more information about film like a plot e.t.c. As iTunes API give only 100x100 image resolution, the app has to convert it to 500x500 on Detail View Controller.
+A test application for a Junior iOS developer vacancy. It uses  RSS iTunes Generator to get top 25 films from iTunes Store. Then it send a request to iTunes Search API with specified film ID to get more information about film like a plot e.t.c. As iTunes API gives only 100x100 image resolution, the app has to convert it to 500x500 on Detail View Controller.
 
 Also It must have done only programmatically without storyboard.
 
