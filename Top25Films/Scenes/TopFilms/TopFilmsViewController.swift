@@ -18,23 +18,15 @@ class TopFilmsViewController: UIViewController, TopFilmsViewProtocol {
     //MARK: - Properties
     private var presenter: TopFilmsPresenterProtocol?
     
-    //MARK: - Inits
-    init(with presenter: TopFilmsPresenterProtocol) {
-        self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
-        view.backgroundColor = .white
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     //MARK: - Setup configuration
     private func setup() {
         let viewController       = self
-        let router               = TopFilmsRouter(topFilmsViewController: self)
-        let presenter            = TopFilmsPresenter(router: router)
+        let presenter            = TopFilmsPresenter()
+        let router               = TopFilmsRouter()
         viewController.presenter = presenter
+        presenter.view           = viewController
+        presenter.router         = router
+        router.viewController    = viewController
     }
     
     //MARK: - UIViews
@@ -59,7 +51,8 @@ class TopFilmsViewController: UIViewController, TopFilmsViewProtocol {
         setup()
         configureTableView()
         setConstraints()
-        presenter?.attachView(view: self)
+        presenter?.getData()
+        view.backgroundColor = .white
         navigationItem.title = "Top 25 Films"
     }
     

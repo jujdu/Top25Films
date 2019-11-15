@@ -43,6 +43,7 @@ class FilmDetailPresenter: FilmDetailPresenterProtocol {
             self.view?.refreshView()
         }
     }
+
     //MARK: - FilmDetailPresenterProtocol
     
     func attachView(view: FilmDetailViewProtocol) {

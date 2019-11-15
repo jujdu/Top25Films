@@ -124,7 +124,9 @@ extension FilmDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UITableViewHeaderFooterView(width: tableView.frame.width, height: 30, text: viewModel[section].sectionTitle)
+        return UITableViewHeaderFooterView(width: tableView.frame.width,
+                                           height: 30,
+                                           text: viewModel[section].sectionTitle)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -8,25 +8,19 @@
 
 import Foundation
 
-protocol TopFilmsRouterProtocol {
+protocol TopFilmsRouterProtocol: class {
     func presentFilmDetailView(for id: String)
 }
 
 class TopFilmsRouter: TopFilmsRouterProtocol {
     
     //MARK: - Properties
-    private weak var topFilmsViewController: TopFilmsViewController?
-    
-    //MARK: - Inits
-    init(topFilmsViewController: TopFilmsViewController) {
-        self.topFilmsViewController = topFilmsViewController
-    }
+    weak var viewController: TopFilmsViewController?
     
     //MARK: - TopFilmsRounter
     func presentFilmDetailView(for id: String) {
-        print(id)
         let filmDetailPresenter = FilmDetailPresenter(filmId: id)
         let filmDetailVC = FilmDetailViewController(with: filmDetailPresenter)
-        topFilmsViewController?.navigationController?.pushViewController(filmDetailVC, animated: true)
+        viewController?.navigationController?.pushViewController(filmDetailVC, animated: true)
     }
 }
