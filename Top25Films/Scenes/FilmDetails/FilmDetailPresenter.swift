@@ -6,12 +6,10 @@
 //  Copyright © 2019 Michael Sidoruk. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol FilmDetailPresenterProtocol {
     func attachView(view: FilmDetailViewProtocol)
-    var numberOfSections: Int { get }
-    func set(cell: FilmDetailCellProtocol, section: Int)
 }
 
 class FilmDetailPresenter: FilmDetailPresenterProtocol {
@@ -19,10 +17,7 @@ class FilmDetailPresenter: FilmDetailPresenterProtocol {
     //MARK: - Properties
     private let networkDataFetcher: NetworkDataFetcher
     weak private var view: FilmDetailViewProtocol?
-    
-    var numberOfSections: Int = 0
     private var filmId: String!
-    private var film: Film!
     
     //MARK: - Inits
     init(networkDataFetcher: NetworkDataFetcher = NetworkDataFetcher(), filmId: String) {
@@ -33,42 +28,26 @@ class FilmDetailPresenter: FilmDetailPresenterProtocol {
     //MARK: - User functions
     private func getData() {
         networkDataFetcher.getAFilm(id: filmId) { [weak self] (filmApi) in
-            guard let filmApi = filmApi else { return }
+            guard let film = filmApi?.films.first else { return }
             guard let self = self else { return }
-            self.film = filmApi.films.first
             
-            self.numberOfSections = 3
+            let imageSection = FilmDetailModelImageItem(imageUrl: film.posterUrl100.convertUrlImageResolution(width: 500, height: 500))
+            let titleSection = FilmDetailModelTitleItem(label: film.filmName)
+            let plotSection = FilmDetailModelPlotItem(label: film.longDescription)
+            
+            self.view?.viewModel.append(imageSection)
+            self.view?.viewModel.append(titleSection)  
+            self.view?.viewModel.append(plotSection)
+
             self.view?.loadingView(is: false)
             self.view?.refreshView()
         }
     }
-    
-    func handleUrlString(urlString: String?) -> URL? {
-        guard let urlString = urlString else { return nil }
-        let convertedUrlString = urlString.convertUrlImageResolution(width: 500, height: 500)
-        guard let url = URL(string: convertedUrlString) else { return nil }
-        return url
-    }
-    
     //MARK: - FilmDetailPresenterProtocol
     
     func attachView(view: FilmDetailViewProtocol) {
         self.view = view
         view.loadingView(is: true)
         getData()
-    }
-    
-    func set(cell: FilmDetailCellProtocol, section: Int) {
-        switch section {
-        case 0:
-            let convertedString = film.posterUrl100.convertUrlImageResolution(width: 600, height: 600)
-            cell.set(with: convertedString)
-        case 1:
-            cell.set(with: film.filmName)
-        case 2:
-            cell.set(with: film.longDescription)
-        default:
-            print("abc")
-        }
     }
 }

@@ -12,12 +12,14 @@ import Kingfisher
 protocol FilmDetailViewProtocol: class {
     func refreshView()
     func loadingView(is loading: Bool)
+    var viewModel: [FilmDetailModelItemProtocol] { get set }
 }
 
 class FilmDetailViewController: UIViewController, FilmDetailViewProtocol {
     
     //MARK: - Properties
     private var presenter: FilmDetailPresenterProtocol?
+    var viewModel: [FilmDetailModelItemProtocol] = [FilmDetailModelItemProtocol]()
     
     //MARK: - Inits
     init(with presenter: FilmDetailPresenterProtocol) {
@@ -67,7 +69,8 @@ class FilmDetailViewController: UIViewController, FilmDetailViewProtocol {
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(FilmDetailPosterCell.self, forCellReuseIdentifier: FilmDetailPosterCell.reuseId)
+        tableView.tableFooterView = UIView()
+        tableView.register(FilmDetailImageCell.self, forCellReuseIdentifier: FilmDetailImageCell.reuseId)
         tableView.register(FilmDetailLabelCell.self, forCellReuseIdentifier: FilmDetailLabelCell.reuseId)
     }
     
@@ -92,65 +95,40 @@ class FilmDetailViewController: UIViewController, FilmDetailViewProtocol {
 //MARK: - UITableViewDelegate, UITableViewDataSource
 extension FilmDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter?.numberOfSections ?? 0
+        return viewModel.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return viewModel[section].rowsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: FilmDetailPosterCell.reuseId, for: indexPath) as? FilmDetailPosterCell {
-                presenter?.set(cell: cell, section: indexPath.section)
+        switch viewModel[indexPath.section].type {
+        case .image:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: FilmDetailImageCell.reuseId, for: indexPath) as? FilmDetailImageCell {
+                cell.set(with: viewModel[indexPath.section])
                 return cell
             }
-        case 1:
+        case .title:
             if let cell = tableView.dequeueReusableCell(withIdentifier: FilmDetailLabelCell.reuseId, for: indexPath) as? FilmDetailLabelCell {
-                presenter?.set(cell: cell, section: indexPath.section)
+                cell.set(with: viewModel[indexPath.section])
                 return cell
             }
-        case 2:
+        case .plot:
             if let cell = tableView.dequeueReusableCell(withIdentifier: FilmDetailLabelCell.reuseId, for: indexPath) as? FilmDetailLabelCell {
-                presenter?.set(cell: cell, section: indexPath.section)
+                cell.set(with: viewModel[indexPath.section])
                 return cell
             }
-        default:
-            return UITableViewCell()
         }
         return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        let label = UILabel(frame: CGRect(x: 8, y: 5, width: tableView.frame.width, height: 20))
-        view.backgroundColor = #colorLiteral(red: 0.7930682302, green: 0.7883549333, blue: 0.7966919541, alpha: 1)
-        view.addSubview(label)
-        
-        switch section {
-        case 0:
-            label.text = nil
-            return nil
-        case 1:
-            label.text = "Title"
-            return view
-        case 2:
-            label.text = "Plot"
-            return view
-        default:
-            return nil
-        }
+        return UITableViewHeaderFooterView(width: tableView.frame.width, height: 30, text: viewModel[section].sectionTitle)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return 0
-        default:
-            return 30
-        }
+        return viewModel[section].sectionHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

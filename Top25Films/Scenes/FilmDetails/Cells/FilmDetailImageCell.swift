@@ -10,13 +10,17 @@ import UIKit
 import Kingfisher
 
 protocol FilmDetailCellProtocol {
-    func set(with: String)
+    func set(with viewModel: FilmDetailModelItemProtocol)
 }
 
-class FilmDetailPosterCell: UITableViewCell, FilmDetailCellProtocol {
+protocol FilmDetailImageCellProtocol {
+    var image: String { get }
+}
+
+class FilmDetailImageCell: UITableViewCell, FilmDetailCellProtocol {
     
     //MARK: - Properties
-    static let reuseId = "FilmDetailPosterCell"
+    static let reuseId = "FilmDetailImageCell"
     
     //MARK: - UIViews
     
@@ -45,8 +49,9 @@ class FilmDetailPosterCell: UITableViewCell, FilmDetailCellProtocol {
     }
     
     //MARK: - User functions
-    func set(with: String) {
-        guard let imageUrl = URL(string: with) else { return }
+    func set(with viewModel: FilmDetailModelItemProtocol) {
+        guard let viewModel = viewModel as? FilmDetailImageCellProtocol,
+              let imageUrl = URL(string: viewModel.image) else { return }
         posterImageView.setImage(imageUrl: imageUrl)
     }
     

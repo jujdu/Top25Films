@@ -7,7 +7,10 @@
 //
 
 import UIKit
-import Kingfisher
+
+protocol FilmDetailLabelCellProtocol {
+    var label: String { get }
+}
 
 class FilmDetailLabelCell: UITableViewCell, FilmDetailCellProtocol {
     
@@ -41,8 +44,9 @@ class FilmDetailLabelCell: UITableViewCell, FilmDetailCellProtocol {
     }
     
     //MARK: - User functions
-    func set(with string: String) {
-        nameLabel.text = string
+    func set(with viewModel: FilmDetailModelItemProtocol) {
+        guard let viewModel = viewModel as? FilmDetailLabelCellProtocol else { return }
+        nameLabel.text = viewModel.label
     }
     
     private func setupConstaints() {
