@@ -13,8 +13,29 @@ enum FilmDetailModelItemType {
     case image
     case title
     case plot
+    
+    func cellForModelItemType(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        switch self {
+        case .image:
+            return tableView.dequeueReusableCell(withIdentifier: FilmDetailImageCell.reuseId, for: indexPath) as! FilmDetailImageCell
+        case .title, .plot:
+            return tableView.dequeueReusableCell(withIdentifier: FilmDetailLabelCell.reuseId, for: indexPath) as! FilmDetailLabelCell  
+        }
+    }
+    
+    func configureCellForModelItemType(cell: UITableViewCell, data: FilmDetailModelItemProtocol) {
+        switch self {
+        case .image:
+            let cell = cell as! FilmDetailImageCell
+            cell.set(with: data)
+        case .title, .plot:
+            let cell = cell as! FilmDetailLabelCell
+            cell.set(with: data)
+        }
+    }
 }
 
+//MARK: - FilmDetailModelItemProtocol + Extension
 protocol FilmDetailModelItemProtocol {
     var type: FilmDetailModelItemType { get }
     var rowsCount: Int { get }

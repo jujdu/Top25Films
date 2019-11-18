@@ -103,24 +103,12 @@ extension FilmDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch viewModel[indexPath.section].type {
-        case .image:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: FilmDetailImageCell.reuseId, for: indexPath) as? FilmDetailImageCell {
-                cell.set(with: viewModel[indexPath.section])
-                return cell
-            }
-        case .title:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: FilmDetailLabelCell.reuseId, for: indexPath) as? FilmDetailLabelCell {
-                cell.set(with: viewModel[indexPath.section])
-                return cell
-            }
-        case .plot:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: FilmDetailLabelCell.reuseId, for: indexPath) as? FilmDetailLabelCell {
-                cell.set(with: viewModel[indexPath.section])
-                return cell
-            }
-        }
-        return UITableViewCell()
+        let data = viewModel[indexPath.section]
+        let sectionType = viewModel[indexPath.section].type
+        
+        let cell = sectionType.cellForModelItemType(tableView: tableView, indexPath: indexPath)
+        sectionType.configureCellForModelItemType(cell: cell, data: data)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -138,3 +126,35 @@ extension FilmDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+//func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//    switch viewModel[indexPath.section].type {
+//    case .image:
+//        return tableView.dequeueReusableCell(withIdentifier: FilmDetailImageCell.reuseId, for: indexPath)
+//        if let cell = tableView.dequeueReusableCell(withIdentifier: FilmDetailImageCell.reuseId, for: indexPath) as? FilmDetailImageCell {
+//            cell.set(with: viewModel[indexPath.section])
+//            return cell
+//        }
+//    case .title:
+//        if let cell = tableView.dequeueReusableCell(withIdentifier: FilmDetailLabelCell.reuseId, for: indexPath) as? FilmDetailLabelCell {
+//            cell.set(with: viewModel[indexPath.section])
+//            return cell
+//        }
+//    case .plot:
+//        if let cell = tableView.dequeueReusableCell(withIdentifier: FilmDetailLabelCell.reuseId, for: indexPath) as? FilmDetailLabelCell {
+//            cell.set(with: viewModel[indexPath.section])
+//            return cell
+//        }
+//    }
+//    return UITableViewCell()
+//}
